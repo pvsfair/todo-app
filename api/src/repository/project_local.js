@@ -37,9 +37,10 @@ function getProject(id, userId) {
   return proj;
 }
 
-function createProject(data) {
+function createProject(data, userId = 1) {
   const newProj = {
     id: projects.length + 1,
+    userId,
     ...data,
     tasks: [],
   };
@@ -47,14 +48,14 @@ function createProject(data) {
   return newProj;
 }
 
-function updatePoject(id, updatedData) {
-  const foundProject = getProject(id);
+function updatePoject(id, updatedData, userId) {
+  const foundProject = getProject(id, userId);
   foundProject.projectName = updatedData.projectName;
   return foundProject;
 }
 
-function deleteProject(id) {
-  const foundProject = getProject(id);
+function deleteProject(id, userId) {
+  const foundProject = getProject(id, userId);
   const index = projects.indexOf(foundProject);
   projects.splice(index, 1);
   return foundProject;
