@@ -1,5 +1,4 @@
-import express from 'express';
-import {} from '../controllers/projectControllers.js';
+import { Router } from 'express';
 import {
   taskDelete,
   taskFind,
@@ -8,7 +7,7 @@ import {
   taskUpdate,
 } from '../controllers/taskController.js';
 
-const routes = express.Router({ mergeParams: true });
+const routes = Router({ mergeParams: true });
 
 routes.get('/', taskList);
 routes.get('/:taskId', taskFind);

@@ -1,13 +1,13 @@
-import express from 'express';
+import { Router } from 'express';
 import {
   projectList,
   projectGet,
   projectSave,
   projectUpdate,
   projectDelete,
-} from '../controllers/projectControllers.js';
+} from '../controllers/projectController.js';
 
-const routes = express.Router();
+const routes = Router();
 
 routes.get('/', projectList);
 routes.get('/:id', projectGet);
