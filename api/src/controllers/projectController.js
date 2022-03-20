@@ -3,7 +3,7 @@ import projectRepo from '../repository/project_local.js';
 import { validateProject } from '../validators/project.js';
 
 export const projectList = (req, res) => {
-  const projs = projectRepo.list();
+  const projs = projectRepo.list(req.user.id);
   return res.json(projs);
 };
 
@@ -13,7 +13,7 @@ export const projectGet = (req, res) => {
     return res.sendStatus(400);
   }
   try {
-    const proj = projectRepo.find(idParsed);
+    const proj = projectRepo.find(idParsed, req.user.id);
     return res.json(proj);
   } catch (err) {
     if (err instanceof NotFoundError) return res.status(404).send(err.message);
@@ -28,7 +28,7 @@ export const projectSave = (req, res) => {
   } catch (err) {
     return res.status(400).send(err);
   }
-  const newProj = projectRepo.create(data);
+  const newProj = projectRepo.create(data, req.user.id);
   return res.json(newProj);
 };
 
@@ -46,7 +46,7 @@ export const projectUpdate = (req, res) => {
   }
 
   try {
-    const updatedProj = projectRepo.update(idParsed, data);
+    const updatedProj = projectRepo.update(idParsed, data, req.user.id);
     return res.json(updatedProj);
   } catch (err) {
     if (err instanceof NotFoundError) return res.status(404).send(err.message);
@@ -61,7 +61,7 @@ export const projectDelete = (req, res) => {
   }
 
   try {
-    const proj = projectRepo.delete(idParsed);
+    const proj = projectRepo.delete(idParsed, req.user.id);
     return res.json(proj);
   } catch (err) {
     if (err instanceof NotFoundError) return res.status(404).send(err.message);

@@ -32,8 +32,8 @@ function createTask(projId, data, userId) {
   return newTask;
 }
 
-function updateTask(projId, taskId, updatedData) {
-  const foundTask = getTask(projId, taskId);
+function updateTask(projId, taskId, updatedData, userId) {
+  const foundTask = getTask(projId, taskId, userId);
 
   foundTask.taskName = updatedData.taskName;
   return foundTask;

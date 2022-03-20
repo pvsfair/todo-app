@@ -8,7 +8,7 @@ export const taskList = (req, res) => {
   if (!parsedProjId) return res.sendStatus(400);
 
   try {
-    const tasks = taskRepo.list(parsedProjId);
+    const tasks = taskRepo.list(parsedProjId, req.user.id);
     return res.json(tasks);
   } catch (err) {
     if (err instanceof NotFoundError) return res.status(404).send(err.message);
@@ -23,7 +23,7 @@ export const taskFind = (req, res) => {
   if (!parsedProjId || !parsedTaskId) return res.sendStatus(400);
 
   try {
-    const task = taskRepo.find(parsedProjId, parsedTaskId);
+    const task = taskRepo.find(parsedProjId, parsedTaskId, req.user.id);
     return res.json(task);
   } catch (err) {
     if (err instanceof NotFoundError) return res.status(404).send(err.message);
@@ -44,7 +44,7 @@ export const taskSave = (req, res) => {
   }
 
   try {
-    const task = taskRepo.create(parsedProjId, data);
+    const task = taskRepo.create(parsedProjId, data, req.user.id);
     return res.json(task);
   } catch (err) {
     if (err instanceof NotFoundError) return res.status(404).send(err.message);
@@ -66,7 +66,7 @@ export const taskUpdate = (req, res) => {
   }
 
   try {
-    const task = taskRepo.update(parsedProjId, parsedTaskId, data);
+    const task = taskRepo.update(parsedProjId, parsedTaskId, data, req.user.id);
     return res.json(task);
   } catch (err) {
     if (err instanceof NotFoundError) return res.status(404).send(err.message);
@@ -81,7 +81,7 @@ export const taskDelete = (req, res) => {
   if (!parsedProjId || !parsedTaskId) return res.sendStatus(400);
 
   try {
-    const task = taskRepo.delete(parsedProjId, parsedTaskId);
+    const task = taskRepo.delete(parsedProjId, parsedTaskId, req.user.id);
     return res.json(task);
   } catch (err) {
     if (err instanceof NotFoundError) return res.status(404).send(err.message);
