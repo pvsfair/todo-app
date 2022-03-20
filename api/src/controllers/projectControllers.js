@@ -1,17 +1,6 @@
-import Joi from 'joi';
 import { NotFoundError } from '../repository/errors.js';
 import projectRepo from '../repository/project_local.js';
-
-const schema = Joi.object({
-  projectName: Joi.string().min(3).max(100).required(),
-});
-
-function validateProject(jsonData) {
-  const result = schema.validate(jsonData, { abortEarly: false, allowUnknown: true });
-  if (result.error) {
-    throw result.error.details.map((detail) => detail.message).join(', ');
-  }
-}
+import { validateProject } from '../validators/project.js';
 
 export const projectList = (req, res) => {
   const projs = projectRepo.list();
