@@ -1,5 +1,6 @@
 import express from 'express';
 import projectsRoutes from './routes/projects.routes.js';
+import tasksRoutes from './routes/tasks.routes.js';
 
 const app = express();
 
@@ -10,5 +11,6 @@ app.get('/api', (req, res) => {
 });
 
 app.use('/api/projects', projectsRoutes);
+app.use('/api/projects/:projId/task', tasksRoutes);
 
 export default app;
