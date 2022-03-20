@@ -29,7 +29,7 @@ export const projectSave = (req, res) => {
     return res.status(400).send(err);
   }
   const newProj = projectRepo.create(data);
-  return res.send(newProj);
+  return res.json(newProj);
 };
 
 export const projectUpdate = (req, res) => {
@@ -47,7 +47,7 @@ export const projectUpdate = (req, res) => {
 
   try {
     const updatedProj = projectRepo.update(idParsed, data);
-    return res.send(updatedProj);
+    return res.json(updatedProj);
   } catch (err) {
     if (err instanceof NotFoundError) return res.status(404).send(err.message);
     return res.status(400).send(err);
@@ -62,7 +62,7 @@ export const projectDelete = (req, res) => {
 
   try {
     const proj = projectRepo.delete(idParsed);
-    return res.send(proj);
+    return res.json(proj);
   } catch (err) {
     if (err instanceof NotFoundError) return res.status(404).send(err.message);
     return res.status(400).send(err);
