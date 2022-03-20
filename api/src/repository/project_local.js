@@ -16,9 +16,9 @@ let projects = [
     userId: 2,
     projectName: 'proj 1',
     tasks: [
-      { id: 1, taskName: 'task 1', done: true },
-      { id: 2, taskName: 'task 2', done: false },
-      { id: 3, taskName: 'task 3', done: false },
+      { id: 4, taskName: 'task 1', done: true },
+      { id: 5, taskName: 'task 2', done: false },
+      { id: 6, taskName: 'task 3', done: false },
     ],
   },
 ];
@@ -29,12 +29,10 @@ function listProjects(userId) {
 }
 
 function getProject(id, userId) {
-  let proj = undefined;
-  if (userId) {
-    const projs = projects.filter((proj) => proj.userId === userId);
-    proj = projs.find((proj) => proj.id === id);
-  }
-  proj = projects.find((proj) => proj.id === id);
+  const projs = listProjects(userId);
+
+  const proj = projs.find((proj) => proj.id === id);
+
   if (!proj) throw new NotFoundError('Project', id);
   return proj;
 }
