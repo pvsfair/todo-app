@@ -3,8 +3,15 @@ import projectsRoutes from './routes/projects.routes.js';
 import tasksRoutes from './routes/tasks.routes.js';
 import authRoutes from './routes/auth.routes.js';
 import auth from './middlewares/authentication.js';
+import cors from 'cors';
 
 const app = express();
+
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+  }),
+);
 
 app.use(express.json());
 

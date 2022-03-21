@@ -34,3 +34,7 @@ export const register = (req, res) => {
     return res.status(400).send(err);
   }
 };
+
+export const validateHash = (req, res) => {
+  res.send({ username: req.user.username, name: req.user.name });
+};
