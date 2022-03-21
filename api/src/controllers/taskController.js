@@ -1,6 +1,6 @@
 import { NotFoundError } from '../repository/errors.js';
 import taskRepo from '../repository/task_local.js';
-import { validateTask } from '../validators/task.js';
+import { validateTask, validateTaskUpdate } from '../validators/task.js';
 
 export const taskList = (req, res) => {
   const parsedProjId = parseInt(req.params.projId);
@@ -60,7 +60,7 @@ export const taskUpdate = (req, res) => {
   if (!parsedProjId || !parsedTaskId) return res.sendStatus(400);
 
   try {
-    validateTask(data);
+    validateTaskUpdate(data);
   } catch (err) {
     return res.status(400).send(err);
   }

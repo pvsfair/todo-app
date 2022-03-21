@@ -35,7 +35,9 @@ function createTask(projId, data, userId) {
 function updateTask(projId, taskId, updatedData, userId) {
   const foundTask = getTask(projId, taskId, userId);
 
-  foundTask.taskName = updatedData.taskName;
+  if (updatedData.taskName) foundTask.taskName = updatedData.taskName;
+  if (updatedData.done !== undefined) foundTask.done = updatedData.done;
+
   return foundTask;
 }
 
