@@ -26,6 +26,8 @@ function createTask(projId, data, userId) {
     id: totalTasksAmount() + 1,
     ...data,
     done: false,
+    createdAt: Date.now(),
+    finishedAt: null,
   };
   const tasks = listTasks(projId, userId);
   tasks.push(newTask);
