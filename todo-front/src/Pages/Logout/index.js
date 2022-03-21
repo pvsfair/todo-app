@@ -13,6 +13,7 @@ function Logout() {
   }, []);
   useEffect(() => {
     if (!state.user.userHash) navigate('/');
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [state.user]);
   return <></>;
 }

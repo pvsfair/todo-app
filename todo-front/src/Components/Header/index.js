@@ -10,10 +10,14 @@ export default function Header() {
     <div className={s.Header}>
       <span>ToDo List</span>
       <div>
-        <span>{state.user.displayName}</span>
-        <span className={s.Action}>
-          <CaretDownIcon />
-        </span>
+        {state.user.displayName && (
+          <>
+            <span>{state.user.displayName}</span>
+            <span className={s.Action}>
+              <CaretDownIcon />
+            </span>
+          </>
+        )}
       </div>
     </div>
   );
