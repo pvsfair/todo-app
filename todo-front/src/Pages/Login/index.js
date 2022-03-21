@@ -19,6 +19,7 @@ function Login() {
     if (hash) {
       validateHash(hash);
     }
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
   useEffect(() => {
     if (!state.loginError && state.user.userHash) navigate('/todo');
