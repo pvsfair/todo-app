@@ -3,7 +3,11 @@ import s from './styles.module.scss';
 
 function TodoForm({ handleAdd }) {
   const [newTaskName, setNewTaskName] = useState('');
-
+  const handleSubmit = () => {
+    if (!newTaskName) return;
+    handleAdd(newTaskName);
+    setNewTaskName('');
+  };
   return (
     <div className={s.Form}>
       <input
@@ -12,10 +16,17 @@ function TodoForm({ handleAdd }) {
         onChange={(e) => {
           setNewTaskName(e.target.value);
         }}
+        value={newTaskName}
+        onKeyUp={(e) => {
+          if (e.key === 'Enter') {
+            e.stopPropagation();
+            handleSubmit();
+          }
+        }}
       />
       <button
         onClick={() => {
-          handleAdd(newTaskName);
+          handleSubmit();
         }}
       >
         Add

@@ -1,4 +1,25 @@
 .Item {
   display: flex;
   margin-left: 10px;
+  cursor: default;
+  input {
+    cursor: pointer;
+  }
+
+  .Actions {
+    display: none;
+    svg {
+      width: 12px;
+      padding: 0 4px;
+      cursor: pointer;
+      &:hover {
+        color: dodgerblue;
+      }
+    }
+  }
+  &:hover {
+    .Actions {
+      display: inherit;
+    }
+  }
 }

@@ -4,13 +4,16 @@
   padding: 0 10px;
   gap: 10px;
   height: 2rem;
-  input {
-    display: flex;
-    flex: 2;
-  }
+  input,
   button {
     display: inline;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+  }
+  input {
+    flex: 3;
+  }
+  button {
     flex: 1;
-    text-align: center;
   }
 }

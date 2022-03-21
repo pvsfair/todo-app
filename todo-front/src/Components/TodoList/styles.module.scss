@@ -9,7 +9,10 @@
   padding: 0 0 10px;
   align-items: flex-start;
   .Content {
+    display: flex;
+    flex-flow: column;
     padding: 0 10px;
+    align-items: flex-start;
   }
 }
 
@@ -22,8 +25,12 @@
 }
 
 .Actions {
+  cursor: pointer;
   svg {
     width: 12px;
     padding: 0 4px;
+    &:hover {
+      color: dodgerblue;
+    }
   }
 }

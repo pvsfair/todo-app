@@ -1,45 +1,88 @@
-import React, { useMemo } from 'react';
+import React, { useState } from 'react';
 import TodoItem from './TodoItem';
 import TodoForm from './TodoForm';
 import s from './styles.module.scss';
 import { TrashIcon, PencilIcon } from '../../Assets';
 
-function TodoList({ project }) {
-  const doneTasks = useMemo(
-    () => project.tasks.filter((task) => task.done),
-    [project.tasks],
-  );
-  const todoTasks = useMemo(
-    () => project.tasks.filter((task) => !task.done),
-    [project.tasks],
-  );
+function TodoList({
+  handleUpdateProject,
+  handleDeleteProject,
+  handleTodoClick,
+  handleDeleteTaskClick,
+  handleUpdateTaskNameClick,
+  handleAddTask,
+  project,
+}) {
+  const [editingProjectName, setEditingProjectName] = useState(false);
+  const [projectName, setProjectName] = useState(project.projectName);
 
-  const addNewTask = (projId, newTaskName) => {
-    console.log(projId, newTaskName);
+  const doneTasks = project.tasks.filter((task) => task.done);
+  const todoTasks = project.tasks.filter((task) => !task.done);
+
+  const handleUpdateName = () => {
+    handleUpdateProject(project.id, projectName);
+    setEditingProjectName(false);
+  };
+  const handleEditProjectName = () => {
+    setEditingProjectName(true);
+  };
+  const handleCancelEditProjectName = () => {
+    setProjectName(project.projectName);
+    setEditingProjectName(false);
   };
   return (
     <div className={s.List}>
       <div className={s.ProjectHeader}>
-        <span>{project.projectName}</span>
+        {editingProjectName ? (
+          <input
+            autoFocus
+            type="text"
+            onChange={(e) => setProjectName(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') handleUpdateName();
+            }}
+            onBlur={handleCancelEditProjectName}
+            value={projectName}
+            onFocus={(e) => e.target.select()}
+          />
+        ) : (
+          <span onDoubleClick={handleEditProjectName}>{project.projectName}</span>
+        )}
         <div className={s.Actions}>
-          <PencilIcon />
-          <TrashIcon />
+          {!editingProjectName && <PencilIcon onClick={handleEditProjectName} />}
+          <TrashIcon onClick={() => handleDeleteProject(project.id)} />
         </div>
       </div>
       <div className={s.Content}>
         <h2>To Do</h2>
         {todoTasks.map((task) => (
-          <TodoItem projectId={project.id} task={task} />
+          <TodoItem
+            handleTaskClick={(task) => handleTodoClick(project.id, task)}
+            handleDeleteTask={(taskId) => handleDeleteTaskClick(project.id, taskId)}
+            handleUpdateTaskName={(taskId, taskName) =>
+              handleUpdateTaskNameClick(project.id, taskId, taskName)
+            }
+            key={task.id}
+            task={task}
+          />
         ))}
         <h2>Done</h2>
         {doneTasks.map((task) => (
-          <TodoItem projectId={project.id} task={task} />
+          <TodoItem
+            handleTaskClick={(task) => handleTodoClick(project.id, task)}
+            handleDeleteTask={(taskId) => handleDeleteTaskClick(project.id, taskId)}
+            handleUpdateTaskName={(taskId, taskName) =>
+              handleUpdateTaskNameClick(project.id, taskId, taskName)
+            }
+            key={task.id}
+            task={task}
+          />
         ))}
       </div>
       <hr />
       <TodoForm
         handleAdd={(taskName) => {
-          return addNewTask(project.id, taskName);
+          return handleAddTask(project.id, taskName);
         }}
       />
     </div>

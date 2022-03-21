@@ -1,48 +1,44 @@
-import { Link } from 'react-router-dom';
 import NewProjectForm from '../../Components/NewProjectForm';
 import TodoList from '../../Components/TodoList';
 import s from './styles.module.scss';
-
-const projects = [
-  {
-    id: 1,
-    userId: 1,
-    projectName: 'proj 1',
-    tasks: [
-      { id: 1, taskName: 'task 1', done: true },
-      { id: 2, taskName: 'task 2', done: false },
-      { id: 3, taskName: 'task 3', done: false },
-    ],
-  },
-  {
-    id: 2,
-    userId: 2,
-    projectName: 'proj 2',
-    tasks: [
-      { id: 4, taskName: 'task 4', done: true },
-      { id: 5, taskName: 'task 5', done: false },
-      { id: 6, taskName: 'task 6', done: false },
-    ],
-  },
-  {
-    id: 3,
-    userId: 2,
-    projectName: 'proj 3',
-    tasks: [
-      { id: 7, taskName: 'task 7', done: true },
-      { id: 8, taskName: 'task 8', done: false },
-      { id: 9, taskName: 'task 9', done: false },
-    ],
-  },
-];
+import { useOrderCreationContext } from '../../Context';
+import {
+  createCreateProject,
+  createCreateTask,
+  createDeleteProject,
+  createDeleteTask,
+  createSetTaskTodoStatus,
+  createUpdateProject,
+  createUpdateTaskName,
+} from '../../Context/actions';
 
 function Todo() {
+  const { state, dispatch } = useOrderCreationContext();
+
+  const createProject = createCreateProject(dispatch);
+  const deleteProject = createDeleteProject(state, dispatch);
+  const updateProject = createUpdateProject(state, dispatch);
+
+  const setTastTodoStatus = createSetTaskTodoStatus(state, dispatch);
+  const createTask = createCreateTask(state, dispatch);
+  const deleteTask = createDeleteTask(state, dispatch);
+  const updateTaskName = createUpdateTaskName(state, dispatch);
+
   return (
     <div className={s.container}>
-      {projects.map((project) => (
-        <TodoList project={project} />
+      {state.projects.map((project) => (
+        <TodoList
+          handleTodoClick={setTastTodoStatus}
+          handleDeleteTaskClick={deleteTask}
+          handleUpdateTaskNameClick={updateTaskName}
+          handleAddTask={createTask}
+          handleUpdateProject={updateProject}
+          handleDeleteProject={deleteProject}
+          key={project.id}
+          project={project}
+        />
       ))}
-      <NewProjectForm />
+      <NewProjectForm handleNewProject={createProject} />
     </div>
   );
 }
