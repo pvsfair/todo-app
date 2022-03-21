@@ -204,6 +204,7 @@ export function createSetTaskTodoStatus(state, dispatch) {
       .then((taskUpdated) => {
         taskFound.taskName = taskUpdated.taskName;
         taskFound.done = taskUpdated.done;
+        taskFound.finishedAt = taskUpdated.finishedAt;
 
         dispatch({
           type: TodoAppActionTypes.setProjects,

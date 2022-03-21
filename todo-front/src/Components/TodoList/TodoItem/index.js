@@ -25,6 +25,11 @@ function TodoItem({ handleTaskClick, handleDeleteTask, handleUpdateTaskName, tas
     setTaskName(task.taskName);
     setEdittingTask(false);
   };
+
+  const formatDate = (date) => {
+    return date.toLocaleString();
+  };
+
   return (
     <div className={s.Item} onClick={() => handleTaskClick(task)}>
       <input id={task.id} type="checkbox" checked={task.done} readOnly />
@@ -48,6 +53,9 @@ function TodoItem({ handleTaskClick, handleDeleteTask, handleUpdateTaskName, tas
           {!edittingTask && <PencilIcon onClick={editClick} />}
           <TrashIcon onClick={deleteClick} />
         </span>
+      )}
+      {task.done && (
+        <div className={s.Tooltip}>{formatDate(new Date(task.finishedAt))}</div>
       )}
     </div>
   );
