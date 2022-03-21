@@ -97,6 +97,8 @@ function getExpirationHashDate() {
 function loginUser(userData) {
   const user = getUser(userData.username);
   if (!user) throw new UnableToLogin();
+  const { hash: hashPass } = hashPassword(userData.password, user.salt);
+  if (user.password !== hashPass) throw new UnableToLogin();
   const { username, name } = user;
   const hashForDB = crypto.randomBytes(randomByteSize).toString('hex');
   const hashForUser = encrypt(hashForDB, user.username);
