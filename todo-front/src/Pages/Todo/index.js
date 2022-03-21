@@ -11,9 +11,12 @@ import {
   createUpdateProject,
   createUpdateTaskName,
 } from '../../Context/actions';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Todo() {
   const { state, dispatch } = useOrderCreationContext();
+  const navigate = useNavigate();
 
   const createProject = createCreateProject(dispatch);
   const deleteProject = createDeleteProject(state, dispatch);
@@ -23,6 +26,11 @@ function Todo() {
   const createTask = createCreateTask(state, dispatch);
   const deleteTask = createDeleteTask(state, dispatch);
   const updateTaskName = createUpdateTaskName(state, dispatch);
+
+  useEffect(() => {
+    if (!state.user.userHash) navigate('/');
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [state.user]);
 
   return (
     <div className={s.container}>

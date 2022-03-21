@@ -1,0 +1,18 @@
+.Header {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  background-image: linear-gradient(to bottom, #fff, #eee);
+  border-bottom: 1px solid #ddd;
+  padding: 15px;
+  > span {
+    font-weight: bold;
+    font-size: x-large;
+  }
+}
+.Action {
+  cursor: pointer;
+  svg {
+    width: 12px;
+  }
+}

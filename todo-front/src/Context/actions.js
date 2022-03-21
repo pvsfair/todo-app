@@ -1,4 +1,11 @@
-import { createProject, createTask, sendTaskUpdate } from './service';
+import {
+  createProject,
+  createTask,
+  login,
+  saveHashOnLocalStorage,
+  sendTaskUpdate,
+  validateHash,
+} from './service';
 import { TodoAppActionTypes } from './types';
 
 export function createGetProject(state) {
@@ -103,5 +110,59 @@ export function createUpdateTaskName(state, dispatch) {
       type: TodoAppActionTypes.setProjects,
       value: state.projects,
     });
+  };
+}
+
+export function createLogin(dispatch) {
+  return function (username, password) {
+    const setLoginError = createSetLoginError(dispatch);
+    login(username, password)
+      .then((user) => {
+        setLoginError(false);
+        saveHashOnLocalStorage(user.authHash.hash);
+        dispatch({
+          type: TodoAppActionTypes.setUser,
+          value: {
+            username: user.authHash.username,
+            userHash: user.authHash.hash,
+            displayName: user.authHash.name,
+          },
+        });
+      })
+      .catch((err) => {
+        setLoginError(true);
+        console.error(err);
+      });
+  };
+}
+
+export function createSetLoginError(dispatch) {
+  return function (loginError) {
+    dispatch({
+      type: TodoAppActionTypes.setLoginError,
+      value: loginError,
+    });
+  };
+}
+
+export function createValidateHash(dispatch) {
+  return function (hash) {
+    const setLoginError = createSetLoginError(dispatch);
+    console.log(12123);
+    validateHash()
+      .then((userData) => {
+        setLoginError(false);
+        dispatch({
+          type: TodoAppActionTypes.setUser,
+          value: {
+            username: userData.username,
+            userHash: hash,
+            displayName: userData.name,
+          },
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 }

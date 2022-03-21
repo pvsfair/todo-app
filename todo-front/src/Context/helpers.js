@@ -1,4 +1,5 @@
 const initialValues = {
+  loginError: false,
   user: {
     username: '',
     userHash: '',

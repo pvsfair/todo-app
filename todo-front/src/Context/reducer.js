@@ -2,6 +2,8 @@ import { TodoAppActionTypes } from './types';
 
 export function reducer(state, { type, value }) {
   switch (type) {
+    case TodoAppActionTypes.setLoginError:
+      return { ...state, loginError: value };
     case TodoAppActionTypes.setUser:
       return { ...state, user: { ...value } };
     case TodoAppActionTypes.setProjects:
