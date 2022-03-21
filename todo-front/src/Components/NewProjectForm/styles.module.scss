@@ -1,0 +1,29 @@
+.Form {
+  display: flex;
+  flex-flow: column;
+  background-image: linear-gradient(to bottom, #ddd, #ccc);
+  border-radius: 5px;
+  padding: 50px 30px;
+  gap: 10px;
+  input,
+  button {
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    height: 2rem;
+  }
+}
+
+.ProjectHeader {
+  background-image: linear-gradient(to bottom, #ddd, #ccc);
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-self: stretch;
+}
+
+.Actions {
+  svg {
+    width: 12px;
+    padding: 0 4px;
+  }
+}

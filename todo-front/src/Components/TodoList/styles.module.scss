@@ -1,0 +1,29 @@
+.List {
+  flex: 1;
+  // width: 30%;
+  display: flex;
+  flex-flow: column;
+  border: 1px solid #ddd;
+  // margin: 0 1.66%;
+  border-radius: 5px;
+  padding: 0 0 10px;
+  align-items: flex-start;
+  .Content {
+    padding: 0 10px;
+  }
+}
+
+.ProjectHeader {
+  background-image: linear-gradient(to bottom, #ddd, #ccc);
+  padding: 5px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-self: stretch;
+}
+
+.Actions {
+  svg {
+    width: 12px;
+    padding: 0 4px;
+  }
+}
