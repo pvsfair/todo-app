@@ -7,6 +7,7 @@ import {
   createCreateTask,
   createDeleteProject,
   createDeleteTask,
+  createListProjects,
   createSetTaskTodoStatus,
   createUpdateProject,
   createUpdateTaskName,
@@ -18,6 +19,7 @@ function Todo() {
   const { state, dispatch } = useOrderCreationContext();
   const navigate = useNavigate();
 
+  const listProjects = createListProjects(dispatch);
   const createProject = createCreateProject(dispatch);
   const deleteProject = createDeleteProject(state, dispatch);
   const updateProject = createUpdateProject(state, dispatch);
@@ -31,6 +33,10 @@ function Todo() {
     if (!state.user.userHash) navigate('/');
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [state.user]);
+
+  useEffect(() => {
+    listProjects();
+  }, []);
 
   return (
     <div className={s.container}>

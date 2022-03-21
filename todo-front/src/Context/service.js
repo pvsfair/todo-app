@@ -17,7 +17,6 @@ api.interceptors.request.use((config) => {
 });
 
 export const login = async (username, password) => {
-  console.log('logging in');
   try {
     return await api.post('/login', { username, password }).then((response) => {
       return response.data;
@@ -29,10 +28,19 @@ export const login = async (username, password) => {
 };
 
 export const validateHash = async () => {
-  console.log('validating hash');
   try {
     return await api.get('/validate').then((response) => {
-      console.log(response.data);
+      return response.data;
+    });
+  } catch (err) {
+    console.error(err.response.status, err.response.data);
+    throw err;
+  }
+};
+
+export const listProjects = async () => {
+  try {
+    return await api.get('/projects').then((response) => {
       return response.data;
     });
   } catch (err) {
@@ -49,26 +57,79 @@ export const getHashFromLocalStorage = () => {
   return localStorage.getItem('userHash');
 };
 
-export const sendTaskUpdate = (projectId, task) => {
-  console.log('taskSent');
-  return task;
+export const sendTaskUpdate = async (projectId, task) => {
+  try {
+    return await api
+      .put(`/projects/${projectId}/task/${task.id}`, {
+        taskName: task.taskName,
+        done: task.done,
+      })
+      .then((response) => {
+        return response.data;
+      });
+  } catch (err) {
+    console.error(err.response.status, err.response.data);
+    throw err;
+  }
 };
 
-// TODO: remove this when api is implemented
-let projectCount = 4;
-export const createProject = (projectName) => {
-  console.log('creating project');
-  return {
-    id: projectCount++,
-    userId: 1,
-    projectName: projectName,
-    tasks: [],
-  };
+export const createProject = async (projectName) => {
+  try {
+    return await api.post('/projects', { projectName }).then((response) => {
+      return response.data;
+    });
+  } catch (err) {
+    console.error(err.response.status, err.response.data);
+    throw err;
+  }
 };
 
-// TODO: remove this when api is implemented
-let taskCount = 10;
-export const createTask = (projectId, taskName) => {
-  console.log('creating task');
-  return { id: taskCount++, taskName, done: false };
+export const deleteProject = async (projectId) => {
+  try {
+    return await api.delete(`/projects/${projectId}`).then((response) => {
+      return response.data;
+    });
+  } catch (err) {
+    console.error(err.response.status, err.response.data);
+    throw err;
+  }
+};
+
+export const updateProject = async (projectId, projectName) => {
+  try {
+    return await api.put(`/projects/${projectId}`, { projectName }).then((response) => {
+      return response.data;
+    });
+  } catch (err) {
+    console.error(err.response.status, err.response.data);
+    throw err;
+  }
+};
+
+export const createTask = async (projectId, taskName) => {
+  try {
+    return await api
+      .post(`/projects/${projectId}/task`, {
+        taskName,
+      })
+      .then((response) => {
+        return response.data;
+      });
+  } catch (err) {
+    console.error(err.response.status, err.response.data);
+    throw err;
+  }
+};
+
+export const deleteTask = async (projectId, taskId) => {
+  try {
+    return await api
+      .delete(`/projects/${projectId}/task/${taskId}`)
+      .then((response) => {
+        return response.data;
+      });
+  } catch (err) {
+    console.error(err.response.status, err.response.data);
+    throw err;
+  }
 };
