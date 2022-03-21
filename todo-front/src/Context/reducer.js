@@ -4,6 +4,10 @@ export function reducer(state, { type, value }) {
   switch (type) {
     case TodoAppActionTypes.setLoginError:
       return { ...state, loginError: value };
+    case TodoAppActionTypes.setRegisterSucess:
+      return { ...state, registerSuccess: value };
+    case TodoAppActionTypes.setRegisterErrors:
+      return { ...state, registerErrors: value };
     case TodoAppActionTypes.setUser:
       return { ...state, user: { ...value } };
     case TodoAppActionTypes.setProjects:

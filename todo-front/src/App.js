@@ -5,6 +5,7 @@ import Todo from './Pages/Todo';
 import Header from './Components/Header';
 import Logout from './Pages/Logout';
 import { TodoAppProvider } from './Context';
+import Register from './Pages/Register';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="todo" element={<Todo />} />
           <Route

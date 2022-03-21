@@ -1,5 +1,7 @@
 const initialValues = {
-  loginError: false,
+  loginError: null,
+  registerSuccess: null,
+  registerErrors: '',
   user: {
     username: '',
     userHash: '',

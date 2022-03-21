@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useOrderCreationContext } from '../../Context';
+import { useTodoAppContext } from '../../Context';
 import { createLogin, createValidateHash } from '../../Context/actions';
 import { getHashFromLocalStorage } from '../../Context/service';
 import s from './styles.module.scss';
 
 function Login() {
-  const { state, dispatch } = useOrderCreationContext();
+  const { state, dispatch } = useTodoAppContext();
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -28,6 +28,9 @@ function Login() {
   const handleLogin = () => {
     login(username, password);
   };
+  const handleRegister = () => {
+    navigate('/register');
+  };
   return (
     <div className={s.container}>
       <div className={s.LoginForm}>
@@ -46,7 +49,7 @@ function Login() {
         />
         {state.loginError && <span>Could not login</span>}
         <div className={s.Actions}>
-          <button>Register</button>
+          <button onClick={handleRegister}>Register</button>
           <button onClick={handleLogin}>Login</button>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   createProject,
   createTask,
@@ -5,6 +6,8 @@ import {
   deleteTask,
   listProjects,
   login,
+  logout,
+  register,
   saveHashOnLocalStorage,
   sendTaskUpdate,
   updateProject,
@@ -27,6 +30,24 @@ export function createSetLoginError(dispatch) {
   };
 }
 
+export function createSetRegisterError(dispatch) {
+  return function (registerError) {
+    dispatch({
+      type: TodoAppActionTypes.setRegisterErrors,
+      value: registerError,
+    });
+  };
+}
+
+export function createSetRegisterSucess(dispatch) {
+  return function (sucess) {
+    dispatch({
+      type: TodoAppActionTypes.setRegisterSucess,
+      value: sucess,
+    });
+  };
+}
+
 export function createLogin(dispatch) {
   const setLoginError = createSetLoginError(dispatch);
   return function (username, password) {
@@ -45,6 +66,46 @@ export function createLogin(dispatch) {
       })
       .catch((err) => {
         setLoginError(true);
+        console.error(err);
+      });
+  };
+}
+
+export function createLogout(dispatch) {
+  const setLoginError = createSetLoginError(dispatch);
+  return function () {
+    logout()
+      .then(() => {
+        dispatch({
+          type: TodoAppActionTypes.setUser,
+          value: {
+            username: '',
+            userHash: '',
+            displayName: '',
+          },
+        });
+      })
+      .catch((err) => {
+        setLoginError(true);
+        console.error(err);
+      });
+  };
+}
+
+export function createRegister(dispatch) {
+  const setRegisterErrors = createSetRegisterError(dispatch);
+  const setRegisterSucess = createSetRegisterSucess(dispatch);
+  return function (username, realName, password) {
+    setRegisterErrors(null);
+    setRegisterSucess(null);
+    register(username, realName, password)
+      .then(() => {
+        setRegisterSucess(true);
+      })
+      .catch((err) => {
+        setRegisterErrors(err.response.data);
+        setRegisterSucess(false);
+
         console.error(err);
       });
   };

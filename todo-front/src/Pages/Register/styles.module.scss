@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+  gap: 2rem;
+  margin: 0 1rem;
+}
+
+.LoginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 400px;
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 5px;
+  background-image: linear-gradient(to bottom, #ddd, #ccc);
+
+  * {
+    height: 2rem;
+  }
+
+  .Actions {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    * {
+      flex-grow: 1;
+    }
+  }
+}

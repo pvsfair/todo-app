@@ -1,7 +1,7 @@
 import NewProjectForm from '../../Components/NewProjectForm';
 import TodoList from '../../Components/TodoList';
 import s from './styles.module.scss';
-import { useOrderCreationContext } from '../../Context';
+import { useTodoAppContext } from '../../Context';
 import {
   createCreateProject,
   createCreateTask,
@@ -16,7 +16,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Todo() {
-  const { state, dispatch } = useOrderCreationContext();
+  const { state, dispatch } = useTodoAppContext();
   const navigate = useNavigate();
 
   const listProjects = createListProjects(dispatch);

@@ -27,6 +27,30 @@ export const login = async (username, password) => {
   }
 };
 
+export const logout = async () => {
+  try {
+    return await api.post('/logout').then((response) => {
+      return response.data;
+    });
+  } catch (err) {
+    console.error(err.response.status, err.response.data);
+    throw err;
+  }
+};
+
+export const register = async (username, realName, password) => {
+  try {
+    return await api
+      .post('/register', { username, password, name: realName })
+      .then((response) => {
+        return response.data;
+      });
+  } catch (err) {
+    console.error(err.response.status, err.response.data);
+    throw err;
+  }
+};
+
 export const validateHash = async () => {
   try {
     return await api.get('/validate').then((response) => {

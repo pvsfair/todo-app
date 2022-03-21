@@ -23,9 +23,9 @@ function TodoAppProvider({ children, value }) {
   );
 }
 
-function useOrderCreationContext() {
+function useTodoAppContext() {
   const context = useContext(TodoAppContext);
   return context;
 }
 
-export { TodoAppProvider, useOrderCreationContext };
+export { TodoAppProvider, useTodoAppContext };

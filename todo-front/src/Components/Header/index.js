@@ -1,10 +1,10 @@
 import React from 'react';
 import { CaretDownIcon } from '../../Assets';
-import { useOrderCreationContext } from '../../Context';
+import { useTodoAppContext } from '../../Context';
 import s from './styles.module.scss';
 
 export default function Header() {
-  const { state } = useOrderCreationContext();
+  const { state } = useTodoAppContext();
 
   return (
     <div className={s.Header}>
