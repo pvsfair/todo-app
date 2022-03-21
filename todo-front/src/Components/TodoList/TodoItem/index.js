@@ -43,10 +43,12 @@ function TodoItem({ handleTaskClick, handleDeleteTask, handleUpdateTaskName, tas
       ) : (
         <span> {task.taskName}</span>
       )}
-      <span className={s.Actions}>
-        {!edittingTask && <PencilIcon onClick={editClick} />}
-        <TrashIcon onClick={deleteClick} />
-      </span>
+      {!task.done && (
+        <span className={s.Actions}>
+          {!edittingTask && <PencilIcon onClick={editClick} />}
+          <TrashIcon onClick={deleteClick} />
+        </span>
+      )}
     </div>
   );
 }
