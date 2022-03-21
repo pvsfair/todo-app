@@ -39,7 +39,12 @@ function updateTask(projId, taskId, updatedData, userId) {
 
   if (updatedData.taskName) foundTask.taskName = updatedData.taskName;
   if (updatedData.done !== undefined) foundTask.done = updatedData.done;
-
+  if (updatedData.done) {
+    foundTask.finishedAt = Date.now();
+  }
+  if (updatedData.done === false) {
+    foundTask.finishedAt = null;
+  }
   return foundTask;
 }
 
