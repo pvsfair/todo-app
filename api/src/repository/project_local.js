@@ -1,27 +1,6 @@
 import { NotFoundError } from './errors.js';
 
-let projects = [
-  {
-    id: 1,
-    userId: 1,
-    projectName: 'proj 1',
-    tasks: [
-      { id: 1, taskName: 'task 1', done: true },
-      { id: 2, taskName: 'task 2', done: false },
-      { id: 3, taskName: 'task 3', done: false },
-    ],
-  },
-  {
-    id: 2,
-    userId: 2,
-    projectName: 'proj 1',
-    tasks: [
-      { id: 4, taskName: 'task 1', done: true },
-      { id: 5, taskName: 'task 2', done: false },
-      { id: 6, taskName: 'task 3', done: false },
-    ],
-  },
-];
+let projects = [];
 
 function listProjects(userId) {
   if (userId) return projects.filter((proj) => proj.userId === userId);

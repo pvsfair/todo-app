@@ -9,10 +9,10 @@ import crypto from 'crypto';
 let users = [
   {
     id: 1,
-    username: 'pvsfair',
+    username: 'user',
     password:
       '44fdaf0d3f0315d980fdfb3dff0289cda41d147e1b089e5865b0ba25d9f09320c0a5806856c200fb3d3e83c9461bd605c8dba5156eaadd1b63f310eeb2e8dc02',
-    name: 'Paulo Alvares',
+    name: 'User Name',
     salt: 'a205b177a388e5bda1df6814befbd20f',
     authHash: 'hash',
     authHashExpiration: Date.now(),
