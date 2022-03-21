@@ -4,7 +4,8 @@ import { useTodoAppContext } from '../../Context';
 import { createLogout } from '../../Context/actions';
 
 function Logout() {
-  const logout = createLogout();
+  const { dispatch } = useTodoAppContext();
+  const logout = createLogout(dispatch);
   const { state } = useTodoAppContext();
   const navigate = useNavigate();
 
